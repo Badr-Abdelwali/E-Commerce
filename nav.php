@@ -13,7 +13,7 @@
 
     <header>
         <div class="home-header background_nav ">
-            <div class="container justify-content-center">
+            <div class="container justify-content-center background_nav">
 
                 <nav class="header-nav d-flex navbar navbar-expand-lg navbar-light col-11">
                     <div class="container justify-content-between col-12">
