@@ -92,7 +92,7 @@ main .one .logo_top > div {
 /* /////////////////////////////////////////////////////// */
 
 .bg_login {
-  height: calc(100vb);
+  min-height: calc(100vh);
   background-color: #303035;
 }
 
@@ -139,7 +139,7 @@ main .one .logo_top > div {
   box-shadow: rgba(0, 0, 0, 0.4) 0px 30px 90px;
 }
 
-.main_card .card .card-body .clamped-text {
+.clamped-text {
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box; /* For browsers that support it */
@@ -152,13 +152,27 @@ main .one .logo_top > div {
   word-break: break-all;
 }
 
-.main_card .card .card-body .clamped-h {
+.clamped-text-details {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box; /* For browsers that support it */
+  display: block;
+  -webkit-box-orient: vertical; /* For browsers that support it */
+  max-height: 9em; /* 3 lines with 1.5em line height */
+  line-height: 1.5em; /* Line height */
+  /* Optional support for non-webkit browsers: */
+  overflow-wrap: break-word; /* Break words to avoid overflow */
+  word-break: break-all;
+}
+
+.clamped-h {
+  font-size: 14px;
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
   display: block;
   -webkit-box-orient: vertical;
-  max-height: 1.5em;
+  max-height: 3em;
   line-height: 1.5em;
   overflow-wrap: break-word;
   word-break: break-all;
@@ -206,6 +220,10 @@ main .one .logo_top > div {
 .hero__slider.owl-carousel .owl-nav button.owl-next {
   left: auto;
   right: 75px;
+}
+
+.landing img {
+  width: 100%;
 }
 
 .hero__items {

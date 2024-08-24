@@ -23,6 +23,7 @@ if (isset($_POST['delete'])) {
     }
 }
 
+
 if (isset($_GET['pay'])) {
     unset($_SESSION['cart']);
 }
@@ -88,18 +89,23 @@ if (isset($_POST['submit'])) {
                                 <h6 class="card-title clamped-h">
                                     <?= $product['title'] ?>
                                 </h6>
-                                <p class="card-text clamped-text opacity-75">
-                                    <?= $product['description'] ?>
-                                </p>
-                                <h4>$<?= $product['price'] ?></h4>
+                                <div class="d-flex justify-content-between flex-row mb-2">
+                                    <h4>$<?= $product['price'] ?></h4>
+                                    <form action="details.php" method="post">
+                                        <button class="btn btn-outline-info fw-bold" type="submit"
+                                            name="submit_details">Details</button>
+                                        <input type="number" class="d-none" name="num_product"
+                                            value="<?= $product['id'] ?>">
+                                    </form>
+                                </div>
                                 <form action="products.php" method="post" class="d-flex justify-content-between flex-row">
-                                    <button onclick="scrollToSection('products_user')" class="btn btn-primary fw-bold"
-                                        type="submit" name="submit">Add To Cart</button>
+                                    <button class="btn btn-outline-success fw-bold" type="submit" name="submit">Add To
+                                        Cart</button>
                                     <input type="number" class="d-none" name="num_product" value="<?= $product['id'] ?>">
                                     <div class="mt-1">
-                                        <label for="<?= $product['id'] ?>" class="fw-bold text-primary">Count: </label>
+                                        <label for="<?= $product['id'] ?>" class="fw-bold text-dark">Count: </label>
                                         <input type="number" name="number" id="<?= $product['id'] ?>" value="1" min="1"
-                                            style="width: 50px;">
+                                            style="width: 30px;">
                                     </div>
                                 </form>
                             </div>
@@ -110,19 +116,19 @@ if (isset($_POST['submit'])) {
             <div class="col-lg-4 pt-1">
                 <?php if (isset($_SESSION['cart'])) : ?>
                     <table class="table w-100 m-2 rounded-1">
-                        <thead>
+                        <thead class="table-active">
                             <th>Product</th>
                             <th class="text-center">Title</th>
                             <th>Number</th>
                             <th>Price</th>
-                            <th>Delete</th>
+                            <th>Remove</th>
                         </thead>
                         <?php foreach ($_SESSION['cart'] as $product) : ?>
                             <tbody>
                                 <tr>
                                     <td><img src="<?= $product['image'] ?>" alt="" style="height: 50px; width: 60px;"></td>
-                                    <td class="clamped-h text-center">
-                                        <h6><?= $product['title'] ?></h6>
+                                    <td class="text-center pt-2">
+                                        <h6 class="clamped-h"><?= $product['title'] ?></h6>
                                     </td>
                                     <td class="text-center"><?= $product['number'] ?></td>
                                     <td><?= $product['price'] ?></td>
@@ -143,7 +149,7 @@ if (isset($_POST['submit'])) {
                     </table>
                     <form action="products.php" method="get">
                         <div class="btn-login d-flex justify-content-center">
-                            <button class="btn btn-warning mt-3 rounded-5 fw-bold" type="submit" name="pay">Pay</button>
+                            <button class="btn btn-success mt-3 rounded-5 fw-bold" type="submit" name="pay">Pay</button>
                         </div>
                     </form>
                 <?php else : ?>
@@ -170,14 +176,7 @@ if (isset($_POST['submit'])) {
             </div>
         </div>
     </div>
-    <script>
-        function scrollToSection(sectionId) {
-            const section = document.getElementById(sectionId);
-            section.scrollIntoView({
-                behavior: 'smooth'
-            });
-        }
-    </script>
+    <?php include 'footer.html' ?>
 </body>
 
 </html>

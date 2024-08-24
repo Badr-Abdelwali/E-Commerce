@@ -1,28 +1,49 @@
 <?php
+error_reporting(E_ERROR);
 include_once 'helpar.php';
-// include 'nav.php';
 session_start();
+
+$error = [];
 
 
 if (isset($_POST['submit'])) {
 
-    $username = $_POST['username'];
-    $email = $_POST['email'];
-    $password = $_POST['password'];
+    // if (!isset($_POST['username']) || empty($_POST['username'])) {
+    //     $error['username'] = "Username required";
+    // }
 
-    $usersData = getAllUsers();
 
-    foreach ($usersData as $user) {
-        if ($email == $user['email'] &&  $password ==  $user['password']) {
-            $_SESSION['username'] = $username;
-            header('location: home.php');
-        } else {
-            echo "Error";
-            break;
+    if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+        $error['email'] = "email is not validate";
+    }
+
+    if (!isset($_POST['email']) || empty($_POST['email'])) {
+        $error['email'] = "Email required";
+    }
+
+    if (empty($_POST['password'])) {
+        $error['password'] = "Password requerd";
+    }
+
+    if (empty($error)) {
+
+        // $username = $_POST['username'];
+        $email = $_POST['email'];
+        $password = $_POST['password'];
+
+        $usersData = getAllUsers();
+
+        foreach ($usersData as $user) {
+            if ($email == $user['email'] &&  $password ==  $user['password']) {
+                $_SESSION['username'] = $username;
+                header('location: home.php');
+            } else {
+                echo "Error";
+                break;
+            }
         }
     }
 }
-
 
 ?>
 
@@ -48,18 +69,30 @@ if (isset($_POST['submit'])) {
             </div>
             <div class="container-fluid ">
 
-                <label for="username">Username</label>
-                <br><input type="text" name="username" id="username"> <br>
                 <label for="email">Email</label>
                 <br><input type="email" name="email" id="email" require> <br>
+                <?php if (isset($error['email'])) : ?>
+                    <div class="bg-danger text-white p-1">
+                        <?= "Error : " . $error['email'] ?> <br>
+                    </div>
+                <?php endif; ?>
+
                 <label for="pas">Password</label>
                 <br><input type="password" name="password" id="pas"> <br>
+                <?php if (isset($error['password'])) : ?>
+                    <div class="bg-danger text-white p-1">
+                        <?= "Error : " . $error['password'] ?> <br>
+                    </div>
+                <?php endif; ?>
+
+
                 <div class="btn-login d-flex justify-content-center">
 
                     <button class="btn btn-primary mt-3 rounded-5" type="submit" name="submit">Login</button>
                 </div>
-                <div class="btn-login d-flex justify-content-center">
-                    <button class="btn btn-warning mt-3 rounded-5"><a class="nav-link" href="signup.php">Signup</a></button>
+                <div class="btn-login d-flex justify-content-center mt-5">
+                    <button class="btn btn-warning mt-3 rounded-5"><a class="nav-link"
+                            href="signup.php">Signup</a></button>
                 </div>
             </div>
         </form>

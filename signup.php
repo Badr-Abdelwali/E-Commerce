@@ -1,18 +1,44 @@
 <?php
+error_reporting(E_ERROR);
 include_once 'helpar.php';
-// include 'nav.php';
 
+$error = [];
 
 if (isset($_POST['submit'])) {
-    $arr = [
-        'username' => $_POST['username'],
-        'email' => $_POST['email'],
-        'password' => $_POST['password'],
-    ];
 
-    addUsers($arr);
+    if (!isset($_POST['username']) || empty($_POST['username'])) {
+        $error['username'] = "Username requerd";
+    }
 
-    header('location: home.php');
+
+    if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+        $error['email'] = "email is not validate";
+    }
+
+    if (!isset($_POST['email']) || empty($_POST['email'])) {
+        $error['email'] = "Email requerd";
+    }
+
+    if (empty($_POST['password'] && $_POST['password2'])) {
+        $error['password'] = "Password requerd";
+    }
+
+    if ($_POST['password'] !== $_POST['password2']) {
+        $error['password'] = "The password is incorrect";
+    }
+
+    if (empty($error)) {
+
+        $arr = [
+            'username' => $_POST['username'],
+            'email' => $_POST['email'],
+            'password' => $_POST['password'],
+        ];
+
+        addUsers($arr);
+
+        header('location: home.php');
+    }
 }
 
 
@@ -44,16 +70,39 @@ if (isset($_POST['submit'])) {
 
                 <label for="username">Username</label>
                 <br><input type="text" name="username" id="username"> <br>
+                <?php if (isset($error['username'])) : ?>
+                <div class="bg-danger text-white p-1">
+                    <?= "Error : " . $error['username'] ?> <br>
+                </div>
+                <?php endif; ?>
+
                 <label for="email">Email</label>
                 <br><input type="email" name="email" id="email" require> <br>
+                <?php if (isset($error['email'])) : ?>
+                <div class="bg-danger text-white p-1">
+                    <?= "Error : " . $error['email'] ?> <br>
+                </div>
+                <?php endif; ?>
+
                 <label for="pas">Password</label>
                 <br><input type="password" name="password" id="pas"> <br>
-                <div class="btn-login d-flex justify-content-center">
+                <?php if (isset($error['password'])) : ?>
+                <div class="bg-danger text-white p-1">
+                    <?= "Error : " . $error['password'] ?> <br>
+                </div>
+                <?php endif; ?>
+
+                <label for="pas">Confirm Password</label>
+                <br><input type="password" name="password2" id="pas"> <br>
+                <?php if (isset($error['password'])) : ?>
+                <div class="bg-danger text-white p-1">
+                    <?= "Error : " . $error['password'] ?> <br>
+                </div>
+                <?php endif; ?>
+
+                <div class="btn-login d-flex justify-content-center pt-5">
 
                     <button class="btn btn-primary mt-3 rounded-5" type="submit" name="submit">Signup</button>
-                </div>
-                <div class="btn-login d-flex justify-content-center">
-                    <button class="btn btn-warning mt-3 rounded-5"><a class="nav-link" href="login.php">Login</a></button>
                 </div>
             </div>
         </form>

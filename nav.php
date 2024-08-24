@@ -12,10 +12,10 @@
 <body>
 
     <header>
-        <div class="home-header background_nav d-flex justify-content-center">
-            <div class="container d-flex justify-content-center background_nav">
+        <div class="home-header background_nav">
+            <div class="container background_nav">
 
-                <nav class="header-nav d-flex navbar navbar-expand-lg navbar-light col-11">
+                <nav class="header-nav navbar navbar-expand-lg navbar-light col-12">
                     <div class="container justify-content-between col-12">
                         <div class="logo col-lg-2 d-flex">
                             <img src="./lib/imges/logo.jpg" alt="logo" class="rounded-circle" />
@@ -43,10 +43,9 @@
                                 </li>
                             </ul>
                         </div>
-                        <div>
-                            <button class="btn btn-warning rounded-5 nav-item p-1">
-                                <a class="fw-bold nav-link text-black ps-1 pe-1" href="logged.php">Logged</a>
-                            </button>
+                        <div class="pt-2">
+
+                            <a class="footer-call-to-action-button button" href="logged.php">Logged</a>
                         </div>
                     </div>
                 </nav>
