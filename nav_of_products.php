@@ -23,11 +23,7 @@
                                 Store
                             </h4>
                         </div>
-                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#navLinksWrapper">
-                            <span class="material-symbols-outlined text-white">menu</span>
-                        </button>
-                        <div class="collapse navbar-collapse justify-content-center col-hg-9" id="navLinksWrapper">
+                        <div class="collapse navbar-collapse justify-content-center col-lg-4" id="navLinksWrapper">
                             <ul class="navbar-nav  mb-lg-0">
                                 <li class="nav-item">
                                     <a class="nav-link" href="home.php">Home</a>
@@ -43,7 +39,13 @@
                                 </li>
                             </ul>
                         </div>
-                        <div class="pt-2">
+                        <div class="col-lg-4 d-flex justify-content-center">
+                            <form action="products.php" method="post" class="w-100 d-flex justify-content-between">
+                                <input type="text" name="search_product" class="w-75 rounded-pill out-line-none search">
+                                <button type="submit" name="submit_search" class="btn btn-outline-info">Search</button>
+                            </form>
+                        </div>
+                        <div class="pt-2 col-lg-2 d-flex justify-content-end">
 
                             <a class="footer-call-to-action-button button" href="logged.php">Logged</a>
                         </div>

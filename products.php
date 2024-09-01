@@ -2,8 +2,24 @@
 error_reporting(E_ERROR);
 session_start();
 include_once 'helpar.php';
-include 'nav.php';
+include 'nav_of_products.php';
 $products = getAllProducts();
+
+if (isset($_POST['submit_search'])) {
+    $search_product = $_POST['search_product'];
+    $new_products = [];
+    foreach ($products as $product) {
+        if (stripos($product['title'], $search_product) !== false) {
+            array_push($new_products, $product);
+        }
+    }
+
+    if (!empty($new_products)) {
+        $products = $new_products;
+    }
+}
+
+
 
 $total = 0;
 

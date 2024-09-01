@@ -27,19 +27,19 @@ if (isset($_POST['submit'])) {
 
     if (empty($error)) {
 
-        // $username = $_POST['username'];
         $email = $_POST['email'];
         $password = $_POST['password'];
+
+        echo $email;
+        echo $password;
+
 
         $usersData = getAllUsers();
 
         foreach ($usersData as $user) {
             if ($email == $user['email'] &&  $password ==  $user['password']) {
-                $_SESSION['username'] = $username;
+                $_SESSION['username'] = $user['username'];
                 header('location: home.php');
-            } else {
-                echo "Error";
-                break;
             }
         }
     }
@@ -62,7 +62,7 @@ if (isset($_POST['submit'])) {
     <div class="bg_login d-flex justify-content-center align-items-center">
         <form action="login.php" method="post">
             <div class="logo d-flex justify-content-center mb-5">
-                <img src="./lib/imges/logo.jpg" alt="logo" class="rounded-circle" />
+                <img src="./lib/imges/logo.jpg" alt="logo" />
                 <h4>
                     Store
                 </h4>
@@ -84,7 +84,6 @@ if (isset($_POST['submit'])) {
                         <?= "Error : " . $error['password'] ?> <br>
                     </div>
                 <?php endif; ?>
-
 
                 <div class="btn-login d-flex justify-content-center">
 
